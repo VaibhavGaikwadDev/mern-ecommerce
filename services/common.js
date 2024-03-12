@@ -168,8 +168,8 @@ exports.invoiceTemplate = function(order){
         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
           <tr>
             <td align="center" valign="top" style="padding: 36px 24px;">
-              <a href="https://sendgrid.com" target="_blank" style="display: inline-block;">
-                <img src="./img/paste-logo-light@2x.png" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
+              <a href="https://imgur.com/a/vCUOvJF" target="_blank" style="display: inline-block;">
+                <img src="https://imgur.com/a/vCUOvJF" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
               </a>
             </td>
           </tr>
@@ -326,7 +326,7 @@ exports.invoiceTemplate = function(order){
           <!-- start permission -->
           <tr>
             <td align="center" bgcolor="#D2C7BA" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-              <p style="margin: 0;">You received this email because we received a request for [type_of_action] for your account. If you didn't request [type_of_action] you can safely delete this email.</p>
+              <p style="margin: 0;">You received this email because we received a request for order for your account. If you didn't request order on mash craft you can safely delete this email.</p>
             </td>
           </tr>
           <!-- end permission -->
