@@ -187,6 +187,7 @@ server.post('/create-payment-intent', async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: totalAmount * 100, // for decimal compensation
     currency: 'inr',
+    payment_method: 'pm_card_visa',
     automatic_payment_methods: {
       enabled: true,
     },
