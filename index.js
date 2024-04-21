@@ -27,6 +27,45 @@ const { env } = require('process');
 
 // Webhook
 
+// const endpointSecret = process.env.ENDPOINT_SECRET;
+
+// server.post(
+//   '/webhook',
+//   express.raw({ type: 'application/json' }),
+//   async (request, response) => {
+//     const sig = request.headers['stripe-signature'];
+
+//     let event;
+
+//     try {
+//       event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
+//     } catch (err) {
+//       response.status(400).send(`Webhook Error: ${err.message}`);
+//       return;
+//     }
+
+//     // Handle the event
+//     switch (event.type) {
+//       case 'payment_intent.succeeded':
+//         const paymentIntentSucceeded = event.data.object;
+
+//         const order = await Order.findById(
+//           paymentIntentSucceeded.metadata.orderId
+//         );
+//         order.paymentStatus = 'received';
+//         await order.save();
+
+//         break;
+//       // ... handle other event types
+//       default:
+//         console.log(`Unhandled event type ${event.type}`);
+//     }
+
+//     // Return a 200 response to acknowledge receipt of the event
+//     response.send();
+//   }
+// );
+
 const endpointSecret = process.env.ENDPOINT_SECRET;
 
 server.post(
@@ -40,23 +79,31 @@ server.post(
     try {
       event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
     } catch (err) {
+      console.error('Webhook Error:', err.message);
       response.status(400).send(`Webhook Error: ${err.message}`);
       return;
     }
+
+    // Log the received event
+    console.log('Received event:', event);
 
     // Handle the event
     switch (event.type) {
       case 'payment_intent.succeeded':
         const paymentIntentSucceeded = event.data.object;
 
-        const order = await Order.findById(
-          paymentIntentSucceeded.metadata.orderId
-        );
+        const order = await Order.findById(paymentIntentSucceeded.metadata.orderId);
+        if (!order) {
+          console.error('Order not found for payment intent:', paymentIntentSucceeded.metadata.orderId);
+          response.status(404).send('Order not found');
+          return;
+        }
         order.paymentStatus = 'received';
         await order.save();
+        console.log('Payment intent succeeded. Order status updated.');
 
         break;
-      // ... handle other event types
+      // Handle other event types here
       default:
         console.log(`Unhandled event type ${event.type}`);
     }
@@ -65,6 +112,7 @@ server.post(
     response.send();
   }
 );
+
 
 // JWT options
 

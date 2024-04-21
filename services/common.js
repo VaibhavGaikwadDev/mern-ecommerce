@@ -6,7 +6,7 @@ let transporter = nodemailer.createTransport({
   port: 587,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: 'vaibhav8145@gmail.com', // gmail
+    user: 'mashcraft.resinart@gmail.com', // gmail
     pass: process.env.MAIL_PASSWORD, // pass
   },
 });
@@ -31,7 +31,7 @@ exports.cookieExtractor = function (req) {
 
 exports.sendMail = async function ({to, subject, text, html}){
     let info = await transporter.sendMail({
-        from: '"E-commerce" <vaibhav8145@gmail.com>', // sender address
+        from: '"E-commerce" <mashcraft.resinart@gmail.com>', // sender address
         to,
         subject,
         text,
@@ -168,8 +168,8 @@ exports.invoiceTemplate = function(order){
         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
           <tr>
             <td align="center" valign="top" style="padding: 36px 24px;">
-              <a href="https://imgur.com/a/vCUOvJF" target="_blank" style="display: inline-block;">
-                <img src="https://imgur.com/a/vCUOvJF" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
+              <a href="https://res.cloudinary.com/diiudnd1r/image/upload/v1711952276/mashcraft_logo_round_iiehuj.png" target="_blank" style="display: inline-block;">
+                <img src="https://res.cloudinary.com/diiudnd1r/image/upload/v1711952276/mashcraft_logo_round_iiehuj.png" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
               </a>
             </td>
           </tr>
@@ -220,7 +220,7 @@ exports.invoiceTemplate = function(order){
           <!-- start copy -->
           <tr>
             <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-              <p style="margin: 0;">Here is a summary of your recent order. If you have any questions or concerns about your order, please <a href="coderdost@gmail.com">contact us</a>.</p>
+              <p style="margin: 0;">Here is a summary of your recent order. If you have any questions or concerns about your order, please <a href="MashCraft@gmail.com">contact us</a>.</p>
             </td>
           </tr>
           <!-- end copy -->
